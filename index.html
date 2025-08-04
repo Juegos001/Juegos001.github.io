@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Galaxy Shooter</title>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1948273802271867"
+         crossorigin="anonymous"></script>
+    
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-1948273802271867",
+        enable_page_level_ads: true
+      });
+    </script>
     <style>
         * {
             margin: 0;
@@ -164,6 +174,16 @@
     </div>
 
     <script>
+        // *** Lógica para AdSense ***
+        // Variable para controlar si el anuncio está listo
+        let adIsReady = false;
+
+        // Evento que se dispara cuando un anuncio intersticial está listo para ser mostrado
+        window.addEventListener('adsbygoogle-interstitial-ready', () => {
+          adIsReady = true;
+        });
+        // ***************************
+
         const canvas = document.getElementById('game-canvas');
         const ctx = canvas.getContext('2d');
         const startScreen = document.getElementById('start-screen');
@@ -978,12 +998,21 @@
             bossHealthFill.style.width = `${healthPercentage}%`;
         }
 
+        // *** Función `gameOver` modificada para mostrar el anuncio ***
         function gameOver() {
             gameRunning = false;
             finalScoreDisplay.textContent = score;
+
+            // Lógica para mostrar el anuncio intersticial
+            if (typeof adsbygoogle !== 'undefined') {
+                (adsbygoogle.config = adsbygoogle.config || {}).pauseOnPush = true;
+                adsbygoogle.push({});
+            }
+
             gameOverScreen.style.display = 'flex';
             playSound('gameOver');
         }
+        // ************************************************************
     </script>
 </body>
 </html>
