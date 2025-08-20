@@ -2,1017 +2,203 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Galaxy Shooter</title>
-    
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1948273802271867"
-         crossorigin="anonymous"></script>
-    
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-1948273802271867",
-        enable_page_level_ads: true
-      });
-    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galaxy Shooter - El mejor juego de nave espacial | Blog y Guías</title>
     <style>
-        * {
+        body {
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            user-select: none;
-        }
-
-        body {
-            overflow: hidden;
-            background: #111;
-            font-family: 'Arial', sans-serif;
-        }
-
-        #game-container {
-            position: relative;
-            width: 100vw;
-            height: 100vh;
-        }
-
-        #game-canvas {
-            display: block;
-            background: radial-gradient(ellipse at center, #1a1a2e 0%, #16213e 100%);
-        }
-
-        #start-screen, #game-over-screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            z-index: 10;
-            text-align: center;
-            padding: 1rem;
-        }
-
-        #game-over-screen {
-            display: none;
-        }
-
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: #ff6b6b;
-            text-shadow: 0 0 10px rgba(255, 107, 107, 0.7);
-        }
-
-        button {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
-            border: none;
-            color: white;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            border-radius: 30px;
-            cursor: pointer;
-            margin-top: 2rem;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.6);
-        }
-
-        #score-display, #ammo-display, #wave-display {
-            position: absolute;
-            top: 20px;
-            color: white;
-            font-size: 1.5rem;
-            z-index: 5;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-        }
-        #score-display { left: 20px; }
-        #ammo-display { right: 20px; }
-        #wave-display { top: 60px; left: 20px; }
-
-        .instructions {
-            margin-top: 2rem;
-            text-align: center;
-            max-width: 500px;
+            background-color: #0d1a26;
+            color: #e0e0e0;
             line-height: 1.6;
         }
-
-        .final-score {
-            font-size: 2rem;
-            margin-bottom: 2rem;
+        header {
+            background-color: #1a2a3e;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        nav a {
             color: #4ecdc4;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: color 0.3s;
         }
-
-        #health-bar, #boss-health-bar {
-            position: absolute;
-            top: 100px;
-            left: 20px;
-            width: 200px;
-            height: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            overflow: hidden;
-            z-index: 5;
+        nav a:hover {
+            color: #ff6b6b;
         }
-        #boss-health-bar {
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80%;
-            display: none;
+        main {
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin: auto;
         }
-
-        #health-fill, #boss-health-fill {
-            height: 100%;
-            width: 100%;
-            background: linear-gradient(90deg, #06d6a0 0%, #06d6a0 100%);
-            transition: width 0.3s ease;
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1518005877840-5e3650222f7c') no-repeat center center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
-        #boss-health-fill {
-            background: linear-gradient(90deg, #9d0208 0%, #ffc300 100%);
+        .hero h1 {
+            font-size: 3.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+        .hero p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .cta-button {
+            background-color: #ff6b6b;
+            border: none;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.5em;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+            background-color: #ff8e8e;
+        }
+        .section {
+            background-color: #1a2a3e;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .section h2 {
+            color: #4ecdc4;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 2em;
+            border-bottom: 2px solid #4ecdc4;
+            padding-bottom: 10px;
+            display: inline-block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .article-card {
+            background-color: #2b3a51;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .article-card:hover {
+            transform: translateY(-5px);
+        }
+        .article-card h3 {
+            color: #ff6b6b;
+            margin-top: 0;
+        }
+        .about-content, .guide-content {
+            text-align: center;
+        }
+        .about-content img {
+            max-width: 150px;
+            border-radius: 50%;
+            border: 4px solid #4ecdc4;
+            margin-bottom: 15px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #1a2a3e;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.2);
+        }
+        footer a {
+            color: #4ecdc4;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
-    <div id="game-container">
-        <canvas id="game-canvas"></canvas>
 
-        <div id="score-display">Puntuación: 0</div>
-        <div id="ammo-display">Munición: ∞</div>
-        <div id="wave-display">Oleada: 1</div>
-        <div id="health-bar">
-            <div id="health-fill"></div>
-        </div>
-        <div id="boss-health-bar">
-            <div id="boss-health-fill"></div>
-        </div>
+    <header>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="juego.html">Jugar Ahora</a>
+            <a href="#blog">Blog</a>
+            <a href="#guia">Guía del Juego</a>
+            <a href="#acerca-de">Acerca de</a>
+            <a href="politica-privacidad.html">Política de Privacidad</a>
+        </nav>
+    </header>
 
-        <div id="start-screen">
+    <main>
+        <div id="inicio" class="hero">
             <h1>Galaxy Shooter</h1>
-            <div class="instructions" id="instructions-text">
-                <p>Muevete con WASD y dispara con el click izquierdo del ratón.</p>
-                <p>Sobrevive a las oleadas de enemigos para enfrentarte al jefe final.</p>
-                <p>Recoge power-ups para recuperar salud y obtener mejoras.</p>
+            <p>Destruye a la flota enemiga y salva la galaxia en este épico juego arcade.</p>
+            <a href="juego.html"><button class="cta-button">¡Comenzar a Jugar!</button></a>
+        </div>
+
+        <div id="blog" class="section">
+            <h2>Blog de la Galaxia</h2>
+            <div class="article-grid">
+                <div class="article-card">
+                    <h3>Historia del Género "Shoot 'em Up"</h3>
+                    <p>Viaja al pasado para descubrir los orígenes de los juegos de naves, desde los clásicos de los 80 hasta las joyas modernas. Exploramos cómo el género ha evolucionado a lo largo de las décadas.</p>
+                    <a href="#" style="color: #ff6b6b; text-decoration: none;">Leer artículo completo</a>
+                </div>
+                <div class="article-card">
+                    <h3>5 Estrategias para Subir de Nivel Rápido</h3>
+                    <p>¿Quieres dominar Galaxy Shooter? Aquí te revelamos 5 consejos infalibles para mejorar tu precisión, esquivar ataques enemigos y maximizar tus puntuaciones. ¡Conviértete en un experto!</p>
+                    <a href="#" style="color: #ff6b6b; text-decoration: none;">Leer artículo completo</a>
+                </div>
+                <div class="article-card">
+                    <h3>Por qué los Juegos Indie Son el Futuro</h3>
+                    <p>Una mirada profunda al mundo de los desarrolladores independientes. Descubre cómo la creatividad y la pasión dan vida a juegos únicos como el nuestro. ¡El futuro está aquí!</p>
+                    <a href="#" style="color: #ff6b6b; text-decoration: none;">Leer artículo completo</a>
+                </div>
+                <div class="article-card">
+                    <h3>Análisis de Armas y Power-ups</h3>
+                    <p>Un desglose completo de cada arma y power-up en Galaxy Shooter. Aprende cuándo y cómo usar cada uno para tener la ventaja en cualquier situación de combate. ¡Tu arsenal te espera!</p>
+                    <a href="#" style="color: #ff6b6b; text-decoration: none;">Leer artículo completo</a>
+                </div>
+                <div class="article-card">
+                    <h3>Top 10 Juegos Clásicos de Nave</h3>
+                    <p>Recordamos los títulos legendarios que inspiraron a "Galaxy Shooter". Desde "Space Invaders" hasta "Galaga", conoce a los gigantes que formaron el género. <a href="#" style="color: #ff6b6b; text-decoration: none;">Leer más...</a></p>
+                </div>
             </div>
-            <button id="start-button">Comenzar Juego</button>
         </div>
 
-        <div id="game-over-screen">
-            <h1>Game Over</h1>
-            <div class="final-score">Puntuación: <span id="final-score">0</span></div>
-            <button id="restart-button">Jugar de Nuevo</button>
+        <div id="guia" class="section">
+            <h2>Guía Oficial de Galaxy Shooter</h2>
+            <div class="guide-content">
+                <p>Bienvenido a la guía de supervivencia definitiva para todos los pilotos. Aquí encontrarás información detallada sobre los enemigos, las mejores tácticas de combate y cómo conseguir la puntuación más alta.</p>
+                <p>Nuestra misión es simple: sobrevivir a las oleadas de enemigos. Hay tres tipos principales de naves enemigas: las pequeñas y rápidas, las medianas y las grandes con más resistencia. Cada una requiere una estrategia diferente. Los power-ups de salud son tus mejores aliados, así que no dudes en buscarlos.</p>
+                <a href="#" style="color: #ff6b6b; text-decoration: none; font-weight: bold;">Explora la guía completa</a>
+            </div>
         </div>
-    </div>
 
-    <script>
-        // *** Lógica para AdSense ***
-        // Variable para controlar si el anuncio está listo
-        let adIsReady = false;
-
-        // Evento que se dispara cuando un anuncio intersticial está listo para ser mostrado
-        window.addEventListener('adsbygoogle-interstitial-ready', () => {
-          adIsReady = true;
-        });
-        // ***************************
-
-        const canvas = document.getElementById('game-canvas');
-        const ctx = canvas.getContext('2d');
-        const startScreen = document.getElementById('start-screen');
-        const gameOverScreen = document.getElementById('game-over-screen');
-        const startButton = document.getElementById('start-button');
-        const restartButton = document.getElementById('restart-button');
-        const scoreDisplay = document.getElementById('score-display');
-        const ammoDisplay = document.getElementById('ammo-display');
-        const waveDisplay = document.getElementById('wave-display');
-        const healthFill = document.getElementById('health-fill');
-        const bossHealthBar = document.getElementById('boss-health-bar');
-        const bossHealthFill = document.getElementById('boss-health-fill');
-        const finalScoreDisplay = document.getElementById('final-score');
-        const instructionsText = document.getElementById('instructions-text');
-
-        const isMobile = 'ontouchstart' in window;
-
-        if (isMobile) {
-            instructionsText.innerHTML = `
-                <p>Usa el joystick izquierdo para moverte.</p>
-                <p>Usa el joystick derecho para apuntar y disparar.</p>
-                <p>¡Sobrevive y destruye a los enemigos!</p>`;
-        }
-
-        let leftStick = { id: -1, active: false, x: 0, y: 0, startX: 0, startY: 0 };
-        let rightStick = { id: -1, active: false, x: 0, y: 0, startX: 0, startY: 0 };
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        let gameRunning = false;
-        let score = 0;
-        let playerHealth = 100;
-        let enemies = [];
-        let bullets = [];
-        let enemyBullets = [];
-        let explosions = [];
-        let powerups = [];
-        let keys = {};
-        let mouseX = 0;
-        let mouseY = 0;
-        let lastShotTime = 0;
-        let lastEnemyBulletTime = 0;
-        let powerupSpawnTimer = 0;
-        let wave = 0;
-        let enemiesToSpawn = [];
-        let boss = null;
-        let waveSpawnTimer = 0;
-        let waveStarted = false;
-        let playerBulletDamage = 20;
-        let playerShootDelay = 300;
-
-        const player = {
-            x: canvas.width / 2,
-            y: canvas.height / 2,
-            radius: 20,
-            speed: 5,
-            color: '#4ecdc4',
-            lastShot: 0,
-            shootDelay: playerShootDelay,
-            direction: { x: 0, y: 0 },
-            shootDirection: { x: 1, y: 0 }
-        };
-
-        const enemyTypes = {
-            basic: { color: '#ef476f', radius: 15, speed: 2, health: 40, scoreValue: 20 },
-            fast: { color: '#ffd166', radius: 10, speed: 4, health: 20, scoreValue: 30 },
-            heavy: { color: '#06d6a0', radius: 25, speed: 1.5, health: 80, scoreValue: 50 },
-            boss: { color: '#f72585', radius: 50, speed: 0.5, health: 500, scoreValue: 1000 }
-        };
-
-        const waves = [
-            [{type: 'basic', count: 5}],
-            [{type: 'basic', count: 8}],
-            [{type: 'basic', count: 5}, {type: 'fast', count: 3}],
-            [{type: 'basic', count: 10}, {type: 'fast', count: 5}],
-            [{type: 'fast', count: 10}, {type: 'heavy', count: 3}],
-            [{type: 'basic', count: 15}, {type: 'fast', count: 10}, {type: 'heavy', count: 5}],
-            [{type: 'boss', count: 1}]
-        ];
-        
-        const powerupTypes = {
-            health: { color: '#06d6a0', effect: (p) => { p.health = Math.min(100, p.health + 20); updateHealthBar(); } },
-            firerate: { color: '#ffc300', effect: (p) => { p.shootDelay = Math.max(100, p.shootDelay - 50); player.shootDelay = p.shootDelay; } },
-            damage: { color: '#ef476f', effect: (p) => { p.damage += 10; playerBulletDamage = p.damage; } }
-        };
-
-        document.addEventListener('keydown', (e) => { keys[e.key.toLowerCase()] = true; });
-        document.addEventListener('keyup', (e) => { keys[e.key.toLowerCase()] = false; });
-        canvas.addEventListener('mousemove', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            mouseX = e.clientX - rect.left;
-            mouseY = e.clientY - rect.top;
-        });
-        canvas.addEventListener('click', shoot);
-        startButton.addEventListener('click', startGame);
-        restartButton.addEventListener('click', startGame);
-        canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
-        canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
-        canvas.addEventListener('touchend', handleTouchEnd, { passive: false });
-        canvas.addEventListener('touchcancel', handleTouchEnd, { passive: false });
-
-        function handleTouchStart(e) {
-            e.preventDefault();
-            const touches = e.changedTouches;
-            for (let i = 0; i < touches.length; i++) {
-                const touch = touches[i];
-                if (touch.clientX < canvas.width / 2 && !leftStick.active) {
-                    leftStick.id = touch.identifier;
-                    leftStick.active = true;
-                    leftStick.startX = touch.clientX;
-                    leftStick.startY = touch.clientY;
-                    leftStick.x = touch.clientX;
-                    leftStick.y = touch.clientY;
-                } else if (touch.clientX >= canvas.width / 2 && !rightStick.active) {
-                    rightStick.id = touch.identifier;
-                    rightStick.active = true;
-                    rightStick.startX = touch.clientX;
-                    rightStick.startY = touch.clientY;
-                    rightStick.x = touch.clientX;
-                    rightStick.y = touch.clientY;
-                }
-            }
-        }
-
-        function handleTouchMove(e) {
-            e.preventDefault();
-            const touches = e.changedTouches;
-            for (let i = 0; i < touches.length; i++) {
-                const touch = touches[i];
-                if (touch.identifier === leftStick.id) {
-                    leftStick.x = touch.clientX;
-                    leftStick.y = touch.clientY;
-                } else if (touch.identifier === rightStick.id) {
-                    rightStick.x = touch.clientX;
-                    rightStick.y = touch.clientY;
-                }
-            }
-        }
-
-        function handleTouchEnd(e) {
-            e.preventDefault();
-            const touches = e.changedTouches;
-            for (let i = 0; i < touches.length; i++) {
-                const touch = touches[i];
-                if (touch.identifier === leftStick.id) {
-                    leftStick.active = false;
-                    leftStick.id = -1;
-                } else if (touch.identifier === rightStick.id) {
-                    rightStick.active = false;
-                    rightStick.id = -1;
-                }
-            }
-        }
-
-        function startGame() {
-            gameRunning = true;
-            score = 0;
-            playerHealth = 100;
-            enemies = [];
-            bullets = [];
-            enemyBullets = [];
-            explosions = [];
-            powerups = [];
-            wave = 0;
-            boss = null;
-            waveStarted = false;
-            player.x = canvas.width / 2;
-            player.y = canvas.height / 2;
-            lastShotTime = 0;
-            waveSpawnTimer = 0;
-            powerupSpawnTimer = 0;
-            playerBulletDamage = 20;
-            playerShootDelay = 300;
-            
-            updateScoreDisplay();
-            updateHealthBar();
-            updateWaveDisplay();
-            bossHealthBar.style.display = 'none';
-            startScreen.style.display = 'none';
-            gameOverScreen.style.display = 'none';
-            
-            nextWave();
-            gameLoop();
-        }
-
-        function gameLoop() {
-            if (!gameRunning) return;
-            
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            drawBackground();
-            
-            updatePlayer();
-            drawPlayer();
-            
-            updateBullets();
-            drawBullets();
-
-            updateEnemyBullets();
-            drawEnemyBullets();
-
-            updateEnemies();
-            drawEnemies();
-
-            updatePowerups();
-            drawPowerups();
-            
-            drawExplosions();
-
-            if (isMobile) {
-                drawVirtualJoysticks();
-                if (rightStick.active) {
-                    shoot();
-                }
-            }
-
-            const now = Date.now();
-            if (waveStarted && enemies.length === 0 && enemiesToSpawn.length === 0 && !boss) {
-                wave++;
-                nextWave();
-            }
-
-            if (enemiesToSpawn.length > 0 && now - waveSpawnTimer > 1000) {
-                spawnEnemy(enemiesToSpawn.shift());
-                waveSpawnTimer = now;
-            }
-
-            if (boss) {
-                updateBoss();
-                if (now - lastEnemyBulletTime > 2000) {
-                    bossShoot();
-                    lastEnemyBulletTime = now;
-                }
-            }
-            
-            if (now - powerupSpawnTimer > 15000) {
-                spawnPowerup();
-                powerupSpawnTimer = now;
-            }
-
-            if (playerHealth <= 0) {
-                gameOver();
-                return;
-            }
-            
-            requestAnimationFrame(gameLoop);
-        }
-
-        function nextWave() {
-            if (wave < waves.length) {
-                waveStarted = true;
-                enemiesToSpawn = waves[wave].flatMap(w => Array(w.count).fill(w.type));
-                updateWaveDisplay();
-            } else {
-                gameRunning = false;
-                alert("¡Has derrotado a todos los enemigos y al jefe final!");
-                gameOver();
-            }
-        }
-        
-        function drawBackground() {
-            for (let i = 0; i < 100; i++) {
-                const x = Math.random() * canvas.width;
-                const y = Math.random() * canvas.height;
-                const radius = Math.random() * 1.5;
-                const opacity = Math.random();
+        <div id="acerca-de" class="section">
+            <h2>Acerca de Nosotros</h2>
+            <div class="about-content">
                 
-                ctx.beginPath();
-                ctx.arc(x, y, radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${opacity})`;
-                ctx.fill();
-            }
-        }
+                <p>Hola, mi nombre es Red. Creé Galaxy Shooter como un proyecto personal para revivir la nostalgia de los juegos arcade clásicos. Quería un juego simple, divertido y desafiante que cualquiera pudiera disfrutar en su navegador. Espero que te diviertas tanto jugando como yo me divertí creándolo.</p>
+            </div>
+        </div>
+    </main>
 
-        function updatePlayer() {
-            player.direction = { x: 0, y: 0 };
-            if (isMobile) {
-                if (leftStick.active) {
-                    const dx = leftStick.x - leftStick.startX;
-                    const dy = leftStick.y - leftStick.startY;
-                    const len = Math.sqrt(dx*dx + dy*dy);
-                    if (len > 0) {
-                        player.direction.x = dx / len;
-                        player.direction.y = dy / len;
-                    }
-                }
-                if (rightStick.active) {
-                    const dx = rightStick.x - rightStick.startX;
-                    const dy = rightStick.y - rightStick.startY;
-                    const len = Math.sqrt(dx*dx + dy*dy);
-                    if (len > 0) {
-                        player.shootDirection.x = dx / len;
-                        player.shootDirection.y = dy / len;
-                    }
-                } else if (leftStick.active) {
-                    if (player.direction.x !== 0 || player.direction.y !== 0) {
-                        player.shootDirection = { ...player.direction };
-                    }
-                }
-            } else {
-                if (keys['w'] || keys['arrowup']) player.direction.y = -1;
-                if (keys['s'] || keys['arrowdown']) player.direction.y = 1;
-                if (keys['a'] || keys['arrowleft']) player.direction.x = -1;
-                if (keys['d'] || keys['arrowright']) player.direction.x = 1;
-                const dx = mouseX - player.x;
-                const dy = mouseY - player.y;
-                const distance = Math.sqrt(dx*dx + dy*dy);
-                if (distance > 0) {
-                    player.shootDirection = {
-                        x: dx / distance,
-                        y: dy / distance
-                    };
-                }
-            }
-            if (player.direction.x !== 0 || player.direction.y !== 0) {
-                const len = Math.sqrt(player.direction.x**2 + player.direction.y**2);
-                player.direction.x /= len;
-                player.direction.y /= len;
-            }
-            
-            player.x += player.direction.x * player.speed;
-            player.y += player.direction.y * player.speed;
-            
-            player.x = Math.max(player.radius, Math.min(canvas.width - player.radius, player.x));
-            player.y = Math.max(player.radius, Math.min(canvas.height - player.radius, player.y));
-        }
+    <footer>
+        <p>Copyright © 2025 Galaxy Shooter | <a href="politica-privacidad.html">Política de Privacidad</a></p>
+    </footer>
 
-        function drawPlayer() {
-            ctx.save();
-            ctx.translate(player.x, player.y);
-            
-            const angle = Math.atan2(player.shootDirection.y, player.shootDirection.x);
-            ctx.rotate(angle);
-            
-            ctx.beginPath();
-            ctx.moveTo(player.radius, 0);
-            ctx.lineTo(-player.radius, -player.radius/2);
-            ctx.lineTo(-player.radius/2, 0);
-            ctx.lineTo(-player.radius, player.radius/2);
-            ctx.closePath();
-            ctx.fillStyle = player.color;
-            ctx.fill();
-            
-            if (player.direction.x !== 0 || player.direction.y !== 0) {
-                ctx.beginPath();
-                ctx.moveTo(-player.radius, -player.radius/3);
-                ctx.lineTo(-player.radius - 10, 0);
-                ctx.lineTo(-player.radius, player.radius/3);
-                ctx.closePath();
-                ctx.fillStyle = '#ff6b6b';
-                ctx.fill();
-            }
-            
-            ctx.restore();
-        }
-
-        function shoot() {
-            if (!gameRunning) return;
-            
-            const now = Date.now();
-            if (now - player.lastShot < player.shootDelay) return;
-            
-            player.lastShot = now;
-            
-            bullets.push({
-                x: player.x,
-                y: player.y,
-                radius: 5,
-                speed: 15,
-                direction: {
-                    x: player.shootDirection.x,
-                    y: player.shootDirection.y
-                },
-                color: '#ffd166',
-                damage: playerBulletDamage
-            });
-            
-            playSound('shoot');
-        }
-
-        function updateBullets() {
-            for (let i = bullets.length - 1; i >= 0; i--) {
-                const bullet = bullets[i];
-                bullet.x += bullet.direction.x * bullet.speed;
-                bullet.y += bullet.direction.y * bullet.speed;
-                
-                if (bullet.x < 0 || bullet.x > canvas.width || 
-                    bullet.y < 0 || bullet.y > canvas.height) {
-                    bullets.splice(i, 1);
-                    continue;
-                }
-                
-                for (let j = enemies.length - 1; j >= 0; j--) {
-                    const enemy = enemies[j];
-                    const dx = bullet.x - enemy.x;
-                    const dy = bullet.y - enemy.y;
-                    const distance = Math.sqrt(dx*dx + dy*dy);
-                    
-                    if (distance < bullet.radius + enemy.radius) {
-                        enemy.health -= bullet.damage;
-                        bullets.splice(i, 1);
-                        
-                        createExplosion(bullet.x, bullet.y, 15);
-                        
-                        if (enemy.health <= 0) {
-                            score += enemy.scoreValue;
-                            enemies.splice(j, 1);
-                            createExplosion(enemy.x, enemy.y, 30);
-                            updateScoreDisplay();
-                            playSound('explosion');
-                            
-                            if (Math.random() < 0.2) {
-                                spawnPowerup(enemy.x, enemy.y);
-                            }
-                        }
-                        
-                        break;
-                    }
-                }
-
-                if (boss) {
-                    const dx = bullet.x - boss.x;
-                    const dy = bullet.y - boss.y;
-                    const distance = Math.sqrt(dx*dx + dy*dy);
-                    if (distance < bullet.radius + boss.radius) {
-                        boss.health -= bullet.damage;
-                        bullets.splice(i, 1);
-                        updateBossHealthBar();
-                        createExplosion(bullet.x, bullet.y, 15);
-                        if (boss.health <= 0) {
-                            score += boss.scoreValue;
-                            createExplosion(boss.x, boss.y, 100);
-                            boss = null;
-                            updateScoreDisplay();
-                            bossHealthBar.style.display = 'none';
-                        }
-                    }
-                }
-            }
-        }
-
-        function drawBullets() {
-            bullets.forEach(bullet => {
-                ctx.beginPath();
-                ctx.arc(bullet.x, bullet.y, bullet.radius, 0, Math.PI * 2);
-                ctx.fillStyle = bullet.color;
-                ctx.fill();
-                
-                ctx.beginPath();
-                ctx.moveTo(
-                    bullet.x - bullet.direction.x * bullet.radius * 2,
-                    bullet.y - bullet.direction.y * bullet.radius * 2
-                );
-                ctx.lineTo(bullet.x, bullet.y);
-                ctx.strokeStyle = 'rgba(255, 209, 102, 0.5)';
-                ctx.lineWidth = 2;
-                ctx.stroke();
-            });
-        }
-        
-        function updateEnemyBullets() {
-            for (let i = enemyBullets.length - 1; i >= 0; i--) {
-                const bullet = enemyBullets[i];
-                bullet.x += bullet.direction.x * bullet.speed;
-                bullet.y += bullet.direction.y * bullet.speed;
-
-                const dx = bullet.x - player.x;
-                const dy = bullet.y - player.y;
-                const distance = Math.sqrt(dx*dx + dy*dy);
-                if (distance < player.radius + bullet.radius) {
-                    playerHealth -= bullet.damage;
-                    updateHealthBar();
-                    enemyBullets.splice(i, 1);
-                    createExplosion(bullet.x, bullet.y, 15);
-                    playSound('hit');
-                    continue;
-                }
-
-                if (bullet.x < 0 || bullet.x > canvas.width || bullet.y < 0 || bullet.y > canvas.height) {
-                    enemyBullets.splice(i, 1);
-                }
-            }
-        }
-
-        function drawEnemyBullets() {
-            enemyBullets.forEach(bullet => {
-                ctx.beginPath();
-                ctx.arc(bullet.x, bullet.y, bullet.radius, 0, Math.PI * 2);
-                ctx.fillStyle = bullet.color;
-                ctx.fill();
-            });
-        }
-
-        function spawnEnemy(type) {
-            const enemyData = enemyTypes[type];
-            if (type === 'boss') {
-                boss = {
-                    ...enemyData,
-                    x: canvas.width / 2,
-                    y: -enemyData.radius,
-                    maxHealth: enemyData.health,
-                    originalRadius: enemyData.radius,
-                    pulseTimer: 0,
-                    lastMoveTime: 0
-                };
-                bossHealthBar.style.display = 'block';
-                updateBossHealthBar();
-            } else {
-                let x, y;
-                if (Math.random() < 0.5) {
-                    x = Math.random() < 0.5 ? -enemyData.radius : canvas.width + enemyData.radius;
-                    y = Math.random() * canvas.height;
-                } else {
-                    x = Math.random() * canvas.width;
-                    y = Math.random() < 0.5 ? -enemyData.radius : canvas.height + enemyData.radius;
-                }
-                
-                enemies.push({
-                    ...enemyData,
-                    x,
-                    y,
-                    maxHealth: enemyData.health,
-                    originalRadius: enemyData.radius,
-                    pulseTimer: 0
-                });
-            }
-            
-            playSound('spawn');
-        }
-
-        function updateEnemies() {
-            for (let i = enemies.length - 1; i >= 0; i--) {
-                const enemy = enemies[i];
-                const dx = player.x - enemy.x;
-                const dy = player.y - enemy.y;
-                const distance = Math.sqrt(dx*dx + dy*dy);
-                
-                enemy.x += (dx / distance) * enemy.speed;
-                enemy.y += (dy / distance) * enemy.speed;
-                
-                enemy.pulseTimer += 0.1;
-                enemy.radius = enemy.originalRadius * (1 + Math.sin(enemy.pulseTimer) * 0.1);
-                
-                if (distance < player.radius + enemy.radius) {
-                    playerHealth -= 10;
-                    enemies.splice(i, 1);
-                    createExplosion(enemy.x, enemy.y, 20);
-                    playSound('hit');
-                    updateHealthBar();
-                }
-            }
-        }
-
-        function updateBoss() {
-            if (!boss) return;
-
-            const dx = player.x - boss.x;
-            const dy = player.y - boss.y;
-            const distance = Math.sqrt(dx*dx + dy*dy);
-            
-            if (distance > 200) {
-                boss.x += (dx / distance) * boss.speed;
-                boss.y += (dy / distance) * boss.speed;
-            }
-
-            if (distance < player.radius + boss.radius) {
-                playerHealth -= 1;
-                updateHealthBar();
-                createExplosion(player.x, player.y, 10);
-            }
-        }
-        
-        function bossShoot() {
-            if (!boss) return;
-            const dx = player.x - boss.x;
-            const dy = player.y - boss.y;
-            const distance = Math.sqrt(dx*dx + dy*dy);
-            
-            const direction = {
-                x: dx / distance,
-                y: dy / distance
-            };
-            
-            enemyBullets.push({
-                x: boss.x,
-                y: boss.y,
-                radius: 10,
-                speed: 7,
-                direction,
-                color: '#ff6b6b',
-                damage: 15
-            });
-            playSound('enemyShoot');
-        }
-
-        function drawEnemies() {
-            enemies.forEach(enemy => {
-                ctx.save();
-                ctx.translate(enemy.x, enemy.y);
-                
-                ctx.beginPath();
-                ctx.arc(0, 0, enemy.radius, 0, Math.PI * 2);
-                ctx.fillStyle = enemy.color;
-                ctx.fill();
-                
-                ctx.beginPath();
-                ctx.arc(0, 0, enemy.radius * 0.6, 0, Math.PI * 2);
-                ctx.fillStyle = '#370617';
-                ctx.fill();
-                
-                ctx.beginPath();
-                ctx.arc(0, 0, enemy.radius * 0.3, 0, Math.PI * 2);
-                ctx.fillStyle = '#9d0208';
-                ctx.fill();
-                
-                ctx.restore();
-                
-                if (enemy.health < enemy.maxHealth) {
-                    const healthPercentage = enemy.health / enemy.maxHealth;
-                    const barWidth = enemy.radius * 2;
-                    ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
-                    ctx.fillRect(enemy.x - enemy.radius, enemy.y - enemy.radius - 10, barWidth, 5);
-                    ctx.fillStyle = healthPercentage > 0.5 ? '#06d6a0' : healthPercentage > 0.25 ? '#ffd166' : '#ef476f';
-                    ctx.fillRect(enemy.x - enemy.radius, enemy.y - enemy.radius - 10, barWidth * healthPercentage, 5);
-                }
-            });
-            if (boss) {
-                drawBoss(boss);
-            }
-        }
-        
-        function drawBoss(boss) {
-            ctx.save();
-            ctx.translate(boss.x, boss.y);
-            const angle = Math.atan2(player.y - boss.y, player.x - boss.x);
-            ctx.rotate(angle + Math.PI / 2);
-
-            const size = boss.radius;
-            ctx.beginPath();
-            ctx.moveTo(0, -size * 1.5);
-            ctx.lineTo(size * 1.2, size);
-            ctx.lineTo(-size * 1.2, size);
-            ctx.closePath();
-            ctx.fillStyle = '#f72585';
-            ctx.shadowColor = '#f72585';
-            ctx.shadowBlur = 20;
-            ctx.fill();
-            
-            ctx.beginPath();
-            ctx.arc(0, 0, size * 0.5, 0, Math.PI * 2);
-            ctx.fillStyle = '#4cc9f0';
-            ctx.shadowBlur = 0;
-            ctx.fill();
-            
-            ctx.restore();
-        }
-
-        function spawnPowerup(x = null, y = null) {
-            const types = Object.keys(powerupTypes);
-            const randomType = types[Math.floor(Math.random() * types.length)];
-            const powerupData = powerupTypes[randomType];
-
-            if (!x || !y) {
-                x = Math.random() * (canvas.width - 40) + 20;
-                y = Math.random() * (canvas.height - 40) + 20;
-            }
-            
-            powerups.push({
-                x,
-                y,
-                radius: 15,
-                type: randomType,
-                color: powerupData.color,
-                effect: powerupData.effect,
-                timer: 0
-            });
-            
-            playSound('powerupSpawn');
-        }
-
-        function updatePowerups() {
-            for (let i = powerups.length - 1; i >= 0; i--) {
-                const powerup = powerups[i];
-                powerup.timer += 0.05;
-                
-                const dx = player.x - powerup.x;
-                const dy = player.y - powerup.y;
-                const distance = Math.sqrt(dx*dx + dy*dy);
-                
-                if (distance < player.radius + powerup.radius) {
-                    powerup.effect(player);
-                    powerups.splice(i, 1);
-                    createExplosion(powerup.x, powerup.y, 20);
-                    playSound('heal');
-                    continue;
-                }
-                
-                if (powerup.timer > 20) {
-                    powerups.splice(i, 1);
-                }
-            }
-        }
-        
-        function drawPowerups() {
-            powerups.forEach(powerup => {
-                ctx.save();
-                ctx.translate(powerup.x, powerup.y);
-                ctx.rotate(powerup.timer * 0.5);
-                
-                ctx.fillStyle = powerup.color;
-                ctx.shadowColor = powerup.color;
-                ctx.shadowBlur = Math.sin(powerup.timer) * 10 + 5;
-                
-                if (powerup.type === 'health') {
-                    ctx.fillRect(-3, -10, 6, 20);
-                    ctx.fillRect(-10, -3, 20, 6);
-                } else if (powerup.type === 'firerate') {
-                    ctx.beginPath();
-                    ctx.arc(0, 0, 10, 0, Math.PI * 2);
-                    ctx.fill();
-                    ctx.fillRect(-15, -1, 30, 2);
-                } else if (powerup.type === 'damage') {
-                    ctx.fillRect(-10, -10, 20, 20);
-                }
-                
-                ctx.restore();
-            });
-        }
-
-        function createExplosion(x, y, size) {
-            explosions.push({ x, y, size, timer: 0, duration: 0.5 });
-        }
-
-        function drawExplosions() {
-            for (let i = explosions.length - 1; i >= 0; i--) {
-                const explosion = explosions[i];
-                explosion.timer += 0.016;
-                
-                const progress = explosion.timer / explosion.duration;
-                const currentSize = explosion.size * progress;
-                const opacity = 1 - progress;
-                
-                ctx.beginPath();
-                ctx.arc(explosion.x, explosion.y, currentSize, 0, Math.PI * 2);
-                const gradient = ctx.createRadialGradient(explosion.x, explosion.y, 0, explosion.x, explosion.y, currentSize);
-                gradient.addColorStop(0, `rgba(255, 150, 0, ${opacity})`);
-                gradient.addColorStop(1, `rgba(255, 50, 0, ${opacity * 0.5})`);
-                ctx.fillStyle = gradient;
-                ctx.fill();
-                
-                if (explosion.timer >= explosion.duration) {
-                    explosions.splice(i, 1);
-                }
-            }
-        }
-        
-        function drawVirtualJoysticks() {
-            if (leftStick.active) {
-                drawJoystick(leftStick.startX, leftStick.startY, leftStick.x, leftStick.y);
-            }
-            if (rightStick.active) {
-                drawJoystick(rightStick.startX, rightStick.startY, rightStick.x, rightStick.y);
-            }
-        }
-
-        function drawJoystick(baseX, baseY, stickX, stickY) {
-            ctx.beginPath();
-            ctx.arc(baseX, baseY, 40, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
-            ctx.fill();
-
-            ctx.beginPath();
-            ctx.arc(stickX, stickY, 30, 0, Math.PI * 2);
-            ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
-            ctx.fill();
-        }
-
-        function playSound(type) {
-            // console.log(`Play sound: ${type}`);
-        }
-
-        function updateScoreDisplay() {
-            scoreDisplay.textContent = `Puntuación: ${score}`;
-        }
-        
-        function updateWaveDisplay() {
-            if (wave < waves.length - 1) {
-                waveDisplay.textContent = `Oleada: ${wave + 1} / ${waves.length - 1}`;
-            } else {
-                waveDisplay.textContent = `¡Oleada del Jefe!`;
-            }
-        }
-
-        function updateHealthBar() {
-            healthFill.style.width = `${playerHealth}%`;
-            if (playerHealth > 60) {
-                healthFill.style.background = 'linear-gradient(90deg, #06d6a0 0%, #06d6a0 100%)';
-            } else if (playerHealth > 30) {
-                healthFill.style.background = 'linear-gradient(90deg, #ffc300 0%, #ffc300 100%)';
-            } else {
-                healthFill.style.background = 'linear-gradient(90deg, #ff6b6b 0%, #ff6b6b 100%)';
-            }
-        }
-
-        function updateBossHealthBar() {
-            if (!boss) return;
-            const healthPercentage = (boss.health / boss.maxHealth) * 100;
-            bossHealthFill.style.width = `${healthPercentage}%`;
-        }
-
-        // *** Función `gameOver` modificada para mostrar el anuncio ***
-        function gameOver() {
-            gameRunning = false;
-            finalScoreDisplay.textContent = score;
-
-            // Lógica para mostrar el anuncio intersticial
-            if (typeof adsbygoogle !== 'undefined') {
-                (adsbygoogle.config = adsbygoogle.config || {}).pauseOnPush = true;
-                adsbygoogle.push({});
-            }
-
-            gameOverScreen.style.display = 'flex';
-            playSound('gameOver');
-        }
-        // ************************************************************
-    </script>
 </body>
 </html>
